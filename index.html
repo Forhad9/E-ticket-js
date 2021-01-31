@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                   <h4>First Class $<span id="caseTotal">150</span></h4>
+                    <input id="case-count" class="inp-style inp-width" type="number" value="0" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick=" handlePhoneChange('case', true)"><i class="fas fa-plus"></i></button>
+                    <button onclick=" handlePhoneChange('case', false)"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <h4>Economy $<span id="economyTotal">100</span></h4>
+                    <input id="economy-count" class="inp-style inp-width" type="number" value="0" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="handlePhoneChange('economy', true)"><i class="fas fa-plus"></i></button>
+                    <button onclick=" handlePhoneChange('economy', false)"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <h5>Subtotal</h5>
+                    </div>
+                    <div class="right">
+                        <p id="total-balance">500</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="tax-amount">$50</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grand-total">$550</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+        </div>
+    </section>
+</main>
+
+
+<script>
+    function handlePhoneChange(phone,isIncrease){
+       
+    const phoneInput =  document.getElementById(phone + '-count');
+       const phoneCount = parseInt(phoneInput.value);
+    
+        let phoneNewCount = phoneCount;
+
+        if(isIncrease == true){
+            phoneNewCount = phoneCount + 1;
+        }
+        if(isIncrease == false && phoneCount > 0){
+            phoneNewCount = phoneCount - 1;
+        }
+       phoneInput.value = phoneNewCount;
+    
+    let phoneTotal = 0;
+    if(phone == 'economy'){
+        phoneTotal = phoneNewCount * 100;
+    }
+    if(phone == 'case'){
+        phoneTotal = phoneNewCount * 150;
+    }
+       document.getElementById(phone + 'Total').innerText = phoneTotal;
+       calculateTotal();
+      
+      
+ }
+
+ 
+
+ function calculateTotal(){
+    const phoneInput = document.getElementById('economy-count');
+    const PhoneCount = parseInt(phoneInput.value);
+
+    const caseInput = document.getElementById('case-count');
+    const caseCount = parseInt(caseInput.value);
+    let totalPrice = PhoneCount * 100 + caseCount * 150;
+    document.getElementById('total-balance').innerText ='$' + totalPrice;
+    const tax = totalPrice * 0.1;
+    document.getElementById('tax-amount').innerText = '$' + tax;
+    const grandTotal = totalPrice + tax;
+    document.getElementById('grand-total').innerText ='$' + grandTotal
+ }
+ 
+ 
+</script>
+
+</body>
+
+</html>
